@@ -1,6 +1,6 @@
 {
   "name": "icfetcher",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Library to facilitate the creation of reusable fetchers",
   "main": "src/index.js",
   "type": "module",

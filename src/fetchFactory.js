@@ -3,6 +3,7 @@ import _ from "lodash";
 export default function fetchFactory({
   baseUrl,
   url,
+  params,
   method,
   headers,
   body,
@@ -12,10 +13,12 @@ export default function fetchFactory({
   bearerToken,
   mode,
 } = {}) {
-  if (url === undefined) throw new Exception("url is undefined");
-  if (baseUrl === undefined) baseUrl = "";
-  if (headers === undefined) headers = {};
-  if (method === undefined) method = "GET";
+  if (!url) throw new Error("url is undefined");
+  if (!params) params = {};
+  if (!isObject(params)) throw new Error("params must be object");
+  if (!baseUrl) baseUrl = "";
+  if (!headers) headers = {};
+  if (!method) method = "GET";
   if (bearerToken) {
     if (headers["Authorization"])
       console.warn(
@@ -34,10 +37,16 @@ export default function fetchFactory({
   if (autoClearUndefinedBodyAttributes && typeof body === "object")
     body = _.omitBy(body, _.isUndefined);
   if (autoBodyStringfy && typeof body === "object") body = JSON.stringify(body);
-  return fetch(baseUrl + url, {
+
+  const fullUrl = `${baseUrl}${url}?${new URLSearchParams(params)}`;
+  return fetch(fullUrl, {
     method,
     headers,
     body,
     mode,
   });
 }
+
+const isObject = (value) => {
+  return typeof value === "object" && !Array.isArray(value) && value !== null;
+};
