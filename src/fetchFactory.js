@@ -20,6 +20,7 @@ export default function fetchFactory({
   if (!headers) headers = {};
   if (!method) method = "GET";
   if (bearerToken) {
+    console.warn("bearedToken attribute is DEPRECATED");
     if (headers["Authorization"])
       console.warn(
         "bearerToken option redeclare Authorization header (with Bearer prefix)"

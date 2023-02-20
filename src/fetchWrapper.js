@@ -1,11 +1,11 @@
-import BadRequestException from "./BadRequestException.js";
-import ClientException from "./ClientException.js";
-import ForbbidenException from "./ForbbidenException.js";
-import NotFoundException from "./NotFoundException.js";
-import ResponseIsNotJsonException from "./ResponseIsNotJsonException.js";
-import ServerException from "./ServerException.js";
-import UnauthorizedException from "./UnauthorizedException.js";
-import UnprocessableEntityException from "./UnprocessableEntityException.js";
+import BadRequestException from "./exceptions/BadRequestException.js";
+import ClientException from "./exceptions/ClientException.js";
+import ForbbidenException from "./exceptions/ForbbidenException.js";
+import NotFoundException from "./exceptions/NotFoundException.js";
+import ResponseIsNotJsonException from "./exceptions/ResponseIsNotJsonException.js";
+import ServerException from "./exceptions/ServerException.js";
+import UnauthorizedException from "./exceptions/UnauthorizedException.js";
+import UnprocessableEntityException from "./exceptions/UnprocessableEntityException.js";
 
 export default function fetchWrapper(service) {
   return service
