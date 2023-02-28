@@ -2,7 +2,15 @@ import { expect } from "chai";
 import { fetchFactory, fetchWrapper } from "../src/index.js";
 
 describe("create fetcher and fetch a random pokemon", () => {
-  const fetcher = ({ url, method, body }) => {
+  const fetcher = ({
+    url,
+    method,
+    body,
+  }: {
+    url: string;
+    method?: string;
+    body?: BodyInit;
+  }) => {
     return fetchFactory({
       baseUrl: "https://pokeapi.co/api/v2",
       isJson: true,

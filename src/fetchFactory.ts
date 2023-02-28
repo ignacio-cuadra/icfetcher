@@ -1,5 +1,18 @@
 import _ from "lodash";
 
+type FetchFactoryParams = {
+  baseUrl?: string;
+  url: string;
+  params?: Record<string, string>;
+  method?: string;
+  headers?: HeadersInit;
+  body?: BodyInit;
+  isJson?: boolean;
+  autoBodyStringfy?: boolean;
+  autoClearUndefinedBodyAttributes?: boolean;
+  mode?: RequestMode;
+};
+
 export default function fetchFactory({
   baseUrl,
   url,
@@ -10,23 +23,14 @@ export default function fetchFactory({
   isJson,
   autoBodyStringfy = false,
   autoClearUndefinedBodyAttributes = false,
-  bearerToken,
   mode,
-} = {}) {
+}: FetchFactoryParams) {
   if (!url) throw new Error("url is undefined");
   if (!params) params = {};
   if (!isObject(params)) throw new Error("params must be object");
   if (!baseUrl) baseUrl = "";
   if (!headers) headers = {};
   if (!method) method = "GET";
-  if (bearerToken) {
-    console.warn("bearedToken attribute is DEPRECATED");
-    if (headers["Authorization"])
-      console.warn(
-        "bearerToken option redeclare Authorization header (with Bearer prefix)"
-      );
-    headers["Authorization"] = `Bearer ${bearerToken}`;
-  }
   if (isJson) {
     if (headers["Content-Type"] || headers["Accept"])
       console.warn(

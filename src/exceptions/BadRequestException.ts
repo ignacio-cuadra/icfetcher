@@ -1,3 +1,3 @@
-import ClientException from "./ClientException.js";
+import ClientException from "./ClientException";
 
 export default class BadRequestException extends ClientException {}
